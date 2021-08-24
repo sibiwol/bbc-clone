@@ -50,7 +50,83 @@ box-shadow: 3px 3px red, -1em 0 0.4em olive;
 <br/>
 
 ## 상하단 margin 병합현상 
-https://youtu.be/c19Mjg-ivxc <br/>
+https://youtu.be/c19Mjg-ivxc <br/> 
+
+마진 병합현상이란? <br/>
+예시) <br/>
+```
+// HTML
+<section class="section"> section 1 </section>
+<section class="section"> section 2 </section>
+
+// CSS
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.section {
+  color: white;
+  background-color:teal;
+  border: 1px solid;
+  padding: 20px;
+  margin: 20px;
+}
+```
+결과:
+<img width="724" alt="Screen Shot 2021-08-24 at 11 21 49 PM" src="https://user-images.githubusercontent.com/69044941/130633956-3859152a-ba5e-4b73-a712-ba27304ba61b.png">
+
+`.section1`과 `.section2` 사이 여백값은 40px이어야 한다. 하지만 실제 보여지는 것은 20px로 더 안정적이다. <br/> 
+<br/>
+마진병합현상의 조건
+* 인접한 block 요소끼리만 일어난다. 
+* 상하단만 해당한다. (좌우는 해당하지 않음)
+<br/>
+마진병합현상의 단점: <br/>
+부모와 자식 요소가 딱 붙어 있으면 마진병합현상으로 부모마진과 자식마진이 합쳐질 수 있다.  <br/>
+예시) 
+
+```
+// HTML
+<div class='parent'>
+  <div class="children">A</div>
+  <div class="children">B</div>
+</div>
+
+// CSS
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.parent {
+  background-color: gold;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.children {
+  width: 200px;
+  height: 200px;
+  background-color: teal;
+  font-size: 200px;
+  text-align: center;
+  margin: 50px;
+}
+```
+<img width="719" alt="Screen Shot 2021-08-25 at 12 17 15 AM" src="https://user-images.githubusercontent.com/69044941/130643375-836aa42d-bba4-4ed9-a703-b870510d50a8.png">
+
+해결 방법
+1. 부모와 자식 요소에 틈을 벌려 마진병합현상이 일어나는 조건을 없앤다. => 발생하는 문제: 부모 요소의 디자인인이 의도와 다르게 나올 수 있다. 
+    * 부모 클래스에 `padding: 1px`을 넣는다. 
+    * 부모 클래스에 `border: 1px solid transparent`를 넣는다. 
+2. 자식 요소를 `display: inline-block`으로 만들어 마진병합현상이 일어나는 조건을 없앤다. => 발생하는 문제: `.childeren` 요소 사이 여백이 100px이 된다
+3. (👍 best 👍) 부모 클래스에 `overflow:hidden`을 준다.
+
+<img width="721" alt="Screen Shot 2021-08-25 at 12 18 19 AM" src="https://user-images.githubusercontent.com/69044941/130643521-ff353bf0-0b1a-4baa-a8f4-40498982fa3c.png">
+
+(위 이미지는 해결방법 3번에 해당한다.) 
+
 
 ## `transition` duration, delay, leaner <br/>
 ## `will-change` 
