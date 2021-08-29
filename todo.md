@@ -1,6 +1,6 @@
 # CSS
 ## `max-width`
-레퍼런스:
+### 레퍼런스:
 * [MDN - max-width](https://developer.mozilla.org/ko/docs/Web/CSS/max-width)
 
 정의: element의 최대 너비를 설정한다.  
@@ -9,10 +9,62 @@
 * `fit-content`: 해당 element의 content만큼만 차지하도록 설정할 수 있다. 
 
 ## `rem` `em`
-레퍼런스:
+### 레퍼런스:
 * [드림코딩 by 엘리 - 프론트엔드 필수 반응형 CSS 단위 em과 rem 예제프로젝트를 통해 정리 하세요](https://www.youtube.com/watch?v=xWMKz9NCD0k)
 * [브런치 - 폰트 단위: em, rem(root em)](https://brunch.co.kr/@jihoonleeh9l6/32)
 * [Whatcha](https://medium.com/watcha/watcha-%EA%B0%9C%EB%B0%9C-%EC%A7%80%EC%8B%9D-px-em-rem-f569c6e76e66)
+
+### 정의
+**rem:**
+* 부모컨텐츠에 상관없이 html 폰트 사이즈(16px)를 1rem으로 사용한다. 사이즈 변홤 없다.
+* root + em
+
+**em: **
+
+* 부모 요소 폰트 사이즈에 따라 상대적으로 변한다. 
+* 해당 요소의 글골 크기가 없다면 부모폰트의 사이즈를 1em으로
+* 보기 좋은 반응형으로 만들고 싶다면 media query도 rem으로 해주는게 좋다!
+
+### em보다 rem을 선호하는 이유
+* em은 부모요소의 크기를 상속 받다보니 특정 컴포넌트의 스타일을 바꿨을 때 예상치 못하게 컴포넌트 스타일이 변경될 수 있다. 이렇게 될 경우 디버깅이 어렵다. 
+* 자기 자신의 font-size를 참조하기 때문에 em을 사용하는 다른 속서 역시 글자 크기에 영향을 받을 수 밖에 없다. 
+px 대신 rem을 사용하는 이유
+* 브라우저의 기본 폰트 값(16px)을 바꿔 사용하는데 대응하기 위해서
+* 적응형 디자인을 보다 쉽게 만들기 위해서 
+
+### rem 사용 Tip
+* 계산하기 쉽게 참조 대상의 글자 크기를 1픽셀로 맞춰 놓으면 좋다.
+```
+html {
+  font-size: 6.25%;
+}
+// 이제 1rem은 곧, 1px이다. 
+```
+<img width="850" alt="Screen Shot 2021-08-29 at 11 08 42 AM" src="https://user-images.githubusercontent.com/69044941/131235896-6a9aea79-a97a-45b1-8922-00aea9599814.png">
+
+* [픽셀을 em 단위로 바꿔주는 사이트](http://pxtoem.com/)를 이용할 수 있다. 
+
+#### 상황에 따른 사용
+* 절대적인 유닛에는 px, 
+* 상대적인 유닛에는 %, vh, vw, em, rem
+* 부모요소에 따라 요소 크기가 변경되야 한다면 => %, em
+* 부모요소 상관없이 브라우저 크기에 따라 => vh, vw, rem
+* 요소의 높이와 너비에 따라 크기가 변경되어야 한다면 => %, vh, vw
+* 폰트 사이즈에 따라 크기가 변경돼야 한다면 em, rem
+
+**정리**
+* box 자체의 사이즈를 결정할 때 => %, v*, flex
+* font-size를 결정할 때
+    * 루트를 상대로 변경돼야 한다면 => rem
+    * 부모 요소에 따라 변경돼야 한다면 => em
+
+### 참고:
+모니터에서 쓰이는 픽셀은 래스터 이미지의 물리적 좌표를 의미하지만
+브라우저에서의 픽셀은 Reading distance라고 불리는 눈과 모니터와의 적정 거리에서 생겨났다. 
+모니터의 해상도 차이에 따라 글자 크기가 달라 보일 수 있다. 하지만 브라우저는 내부적으로 DPI 대비 평균 픽셀 값 수치를 갖고 있으며 해당 모니터의 DPI로 계산된 픽셀이 이 평균치와 차이가 너무 크게 발생하면 알아서 자동 조절을 해주므로 체감상 큰 차이를 느끼지 못한다.
+
+
+
 
 ## `position`: 
 ### `sticky` 
